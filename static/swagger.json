@@ -1,0 +1,890 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "Api Documentation for Monthly Expense Bill",
+        "version": "1.0.0",
+        "title": "Monthly Expense Bill ",
+        "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [
+        {
+        "url": "http://127.0.0.1:3500"
+        }
+    ],
+
+
+    "tags": [
+        {
+            "name": "Expense Location",
+            "description": "All Apies for Expense Location Model"
+        },
+        {
+            "name": "Expense Head",
+            "description": "All Apies for Expense Head Model"
+        },
+        {
+            "name": "Expense Head Amount Settings",
+            "description": "All Apies for Expense Head Amount Settings Model"
+        },
+        {
+            "name": "Expense Details",
+            "description": "All Apies for Expense Details Model"
+        },
+        {
+            "name": "Expense",
+            "description": "All Apies for Expense Model"
+        }    
+    ],
+
+
+    "components": {
+        "schemas": {
+            "ExpenseLocation": {
+                "type": "object",
+                "properties": {
+                    "ID":{
+                        "type": "string"
+                    },
+                    "LocationName": {
+                        "type": "string"
+                    },
+                    "ShortName": {
+                        "type": "string"
+                    },
+                    "CreatedByID": {
+                        "type": "string"
+                    }   
+                }
+            },
+
+            "ExpenseHead": {
+                "type": "object",
+                "properties": {
+                    "ID":{
+                        "type": "string"
+                    },
+                    "HeadName": {
+                        "type": "string"
+                    },
+                    "CreatedByID": {
+                        "type": "string"
+                    }   
+                }
+            },
+
+            "ExpenseHeadAmountSettings": {
+                "type": "object",
+                "properties": {
+                    "ID":{
+                        "type": "string"
+                    },
+                    "ExpenseHeadID": {
+                        "type": "string"
+                    },
+                    "ExpenseLocationID": {
+                        "type": "string"
+                    },
+                    "Designation": {
+                        "type": "string"
+                    },
+                    "Amount": {
+                        "type": "integer"
+                    },
+                    "CreatedByID": {
+                        "type": "string"
+                    }   
+                }
+            },
+
+            "ExpenseDetails": {
+                "type": "object",
+                "properties": {
+                    "ID":{
+                        "type": "integer"
+                    },
+                    "ExpenseLocationID": {
+                        "type": "string"
+                    },
+                    "ExpenseDate": {
+                        "type": "datetime"
+                    },
+                    "LocationFrom": {
+                        "type": "string"
+                    },
+                    "LocationTo": {
+                        "type": "integer"
+                    },
+                    "ExpenseHeadID": {
+                        "type": "integer"
+                    },
+                    "ExpenseID": {
+                        "type": "integer"
+                    },
+                    "ModeOfTransport": {
+                        "type": "integer"
+                    },
+                    "Distance": {
+                        "type": "integer"
+                    },
+                    "CreatedByID": {
+                        "type": "string"
+                    }   
+                }
+            },
+
+
+            "Expense": {
+                "type": "object",
+                "properties": {
+                    "ID":{
+                        "type": "integer"
+                    },
+                    "EmployeeID": {
+                        "type": "string"
+                    },
+                    "ExpenseMonth": {
+                        "type": "datetime"
+                    },
+                    "CheckedByID": {
+                        "type": "string"
+                    },
+                    "VerifiedByID": {
+                        "type": "string"
+                    },
+                    "ForwardedByID": {
+                        "type": "string"
+                    },
+                    "RecommendedByID": {
+                        "type": "string"
+                    },
+                    "ApprovedByID": {
+                        "type": "string"
+                    },
+                    "FCAApprovedByID": {
+                        "type": "string"
+                    },
+                    "ManagementApprovedByID": {
+                        "type": "string"
+                    },
+                    "Designation": {
+                        "type": "string"
+                    },
+                    "CreatedByID": {
+                        "type": "string"
+                    }   
+                }
+            }
+
+
+
+        }
+    },
+
+
+
+
+
+    "paths": {
+        "/location/add": {
+            "post": {
+            "tags": [
+                    "Expense Location"
+            ],
+            "summary": "Add Data to Expense Location",
+            "requestBody": {
+            "description": "Add Data to Expense Location",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseLocation"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseLocation"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseLocation"
+                    }
+                }
+                }
+            }
+        },
+
+        "/location/show": {
+        "get" :{
+            "tags": [
+                "Expense Location"
+            ],
+            "summary": "Get All Data from Expense Location",
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseLocation"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseLocation"
+                }
+            }
+            }
+        }
+        },
+
+        "/location/update": {
+        "put": {
+        "tags": [
+            "Expense Location"
+        ],
+
+        "summary": "Update Expense Location",
+        "requestBody": {
+        "description": "Update Existing Location On Database",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseLocation"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseLocation"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseLocation"
+                }
+            }
+        }
+        }
+        },
+
+        "/location/delete/{ExpenseLocationID}": {
+        "delete": {
+            "tags": [
+                "Expense Location"
+            ],
+            "parameters": [{
+                "name": "ExpenseLocationID",
+                "in": "path",
+                "description": "Location ID to delete",
+                "required": true,
+                "type": "string",
+                "schema": {
+                    "type": "string"
+                }
+            }],
+            "summary": "Delete Location",                    
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseLocation"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseLocation"
+                    }
+                }
+            }
+        }
+        },
+
+
+
+
+
+
+
+
+
+        "/expensehead/add": {
+            "post": {
+            "tags": [
+                    "Expense Head"
+            ],
+            "summary": "Add Data to Expense Head",
+            "requestBody": {
+            "description": "Add Data to Expense Head",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseHead"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHead"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHead"
+                    }
+                }
+                }
+            }
+        },
+
+        "/expensehead/show": {
+        "get" :{
+            "tags": [
+                "Expense Head"
+            ],
+            "summary": "Get All Data from Expense Head",
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHead"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHead"
+                }
+            }
+            }
+        }
+        },
+
+        "/expensehead/update": {
+        "put": {
+        "tags": [
+            "Expense Head"
+        ],
+
+        "summary": "Update Expense Head",
+        "requestBody": {
+        "description": "Update Existing Head On Database",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseHead"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHead"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHead"
+                }
+            }
+        }
+        }
+        },
+
+        "/expensehead/delete/{ExpenseHeadID}": {
+        "delete": {
+            "tags": [
+                "Expense Head"
+            ],
+            "parameters": [{
+                "name": "ExpenseHeadID",
+                "in": "path",
+                "description": "Head ID to delete",
+                "required": true,
+                "type": "string",
+                "schema": {
+                    "type": "string"
+                }
+            }],
+            "summary": "Delete Expense Head",                    
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHead"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHead"
+                    }
+                }
+            }
+        }
+        },
+
+
+
+
+
+
+
+        "/amount/add": {
+            "post": {
+            "tags": [
+                    "Expense Head Amount Settings"
+            ],
+            "summary": "Add Data to Expense Head Amount Settings",
+            "requestBody": {
+            "description": "Add Data to Expense Head Amount Settings",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                    }
+                }
+                }
+            }
+        },
+
+        "/amount/show": {
+        "get" :{
+            "tags": [
+                "Expense Head Amount Settings"
+            ],
+            "summary": "Get All Data from Expense Head Amount Settings",
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                }
+            }
+            }
+        }
+        },
+
+        "/amount/update": {
+        "put": {
+        "tags": [
+            "Expense Head Amount Settings"
+        ],
+
+        "summary": "Update Expense Expense Head Amount Settings",
+        "requestBody": {
+        "description": "Update Existing Amount On Database",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                }
+            }
+        }
+        }
+        },
+
+        "/amount/delete/{ExpenseHeadAmountSettingsID}": {
+        "delete": {
+            "tags": [
+                "Expense Head Amount Settings"
+            ],
+            "parameters": [{
+                "name": "ExpenseHeadAmountSettingsID",
+                "in": "path",
+                "description": "Amount settings ID to delete",
+                "required": true,
+                "type": "string",
+                "schema": {
+                    "type": "string"
+                }
+            }],
+            "summary": "Delete Expense Head Amount Settings",                    
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseHeadAmountSettings"
+                    }
+                }
+            }
+        }
+        },
+
+
+
+
+
+
+
+
+
+        "/details/add": {
+            "post": {
+            "tags": [
+                    "Expense Details"
+            ],
+            "summary": "Add Data to Expense Details",
+            "requestBody": {
+            "description": "Add Data to Expense Detailss",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseDetails"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseDetails"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseDetails"
+                    }
+                }
+                }
+            }
+        },
+
+        "/details/show": {
+        "get" :{
+            "tags": [
+                "Expense Details"
+            ],
+            "summary": "Get All Data from Expense Details",
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseDetails"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseDetails"
+                }
+            }
+            }
+        }
+        },
+
+        "/details/update": {
+        "put": {
+        "tags": [
+            "Expense Details"
+        ],
+
+        "summary": "Update Expense Expense Details",
+        "requestBody": {
+        "description": "Update Existing ExpenseDetails",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/ExpenseDetails"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseDetails"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/ExpenseDetails"
+                }
+            }
+        }
+        }
+        },
+
+        "/details/delete/{ExpenseDetailsID}": {
+        "delete": {
+            "tags": [
+                "Expense Details"
+            ],
+            "parameters": [{
+                "name": "ExpenseDetailsID",
+                "in": "path",
+                "description": "Expense Detailss ID to delete",
+                "required": true,
+                "type": "string",
+                "schema": {
+                    "type": "integer"
+                }
+            }],
+            "summary": "Delete Expense Expense Details",                    
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseDetails"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/ExpenseDetails"
+                    }
+                }
+            }
+        }
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        "/expense/add": {
+            "post": {
+            "tags": [
+                    "Expense"
+            ],
+            "summary": "Add Data to Expense",
+            "requestBody": {
+            "description": "Add Data to Expense",
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Expense"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Expense"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Expense"
+                    }
+                }
+                }
+            }
+        },
+
+        "/expense/show": {
+        "get" :{
+            "tags": [
+                "Expense"
+            ],
+            "summary": "Get All Data from Expense",
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/Expense"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/Expense"
+                }
+            }
+            }
+        }
+        },
+
+        "/expense/update": {
+        "put": {
+        "tags": [
+            "Expense"
+        ],
+
+        "summary": "Update Expense Expense",
+        "requestBody": {
+        "description": "Update Existing Expense",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Expense"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/Expense"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/Expense"
+                }
+            }
+        }
+        }
+        },
+
+        "/expense/delete/{ExpenseID}": {
+        "delete": {
+            "tags": [
+                "Expense"
+            ],
+            "parameters": [{
+                "name": "ExpenseID",
+                "in": "path",
+                "description": "Expense ID to delete",
+                "required": true,
+                "type": "string",
+                "schema": {
+                    "type": "integer"
+                }
+            }],
+            "summary": "Delete Expense ",                    
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Expense"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/Expense"
+                    }
+                }
+            }
+        }
+        }
+
+
+
+
+    
+
+
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
